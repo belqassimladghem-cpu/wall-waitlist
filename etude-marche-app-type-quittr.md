@@ -116,3 +116,41 @@ Vues médianes par post (>1 000 = format OK), taux quiz terminé (>90 %), downlo
 
 ## 6. Erreurs à ne pas reproduire
 Honte comme levier, chiffres inventés, prompt de notation avant usage, deux remises contradictoires, scarcity bidon ("9 places"), lifetime sans restauration store, base de données ouverte, 2 langues seulement, dépendance à un seul créateur, abandon du support.
+
+---
+
+## 7. Mise à jour : plan d'acquisition à 50 €/jour (≈1 500 €/mois) — objectif "le plus de clients, le plus vite"
+
+### Répartition du budget (mois 1 -> mois 3)
+| Canal | Mois 1 (test) | Mois 2-3 (scale) | Pourquoi |
+|---|---|---|---|
+| Créateurs micro FR/EN au CPM (2-3 $/1 000 vues, 20 % d'avance, vues garanties) | 600 € | 700-900 € | Le canal qui a fait QUITTR, Cal AI, Unchaind. Le seul qui crée la recherche de marque. |
+| Clipping Whop (1-2 $/1 000 vues) | 250 € | 200 € | Volume de vues pas cher pour tester 30-50 hooks en parallèle. |
+| TikTok Spark Ads sur les posts gagnants | 300 € | 400-600 € | Tu n'achètes que ce qui a déjà converti en organique. |
+| Apple Search Ads ("nofap", "dopamine detox", "self control", "quittr", "brainbuddy") | 150 € | 200 € | Intent pur, CPI médian 0,5-2,5 $, QUITTR a disparu de ces résultats. |
+| Outils (Canva Pro, CapCut Pro, ElevenLabs, PostHog gratuit) | 60 € | 60 € | |
+| Réserve pour doubler un créateur qui explose | 140 € | reste | Règle QUITTR : "quand ça pop, tu remets dessus". |
+
+### Séquence jour par jour (30 premiers jours)
+- J1-J3 : landing en ligne (ce dépôt), Apps Script branché, PostHog branché, 3 comptes TikTok/IG/Shorts créés et "chauffés" (regarder la niche 20 min/jour, pas de post).
+- J1-J7 : 50 DMs/jour à des micro-créateurs (10-80 k abonnés, niches : chrétiens FR/EN, fitness, discipline, "mindset", témoignages nofap). Script dans la section 5. Objectif : 5 deals signés semaine 1, 10 vidéos publiées semaine 2.
+- J4 : lancement du posting organique : 2-3 posts/jour/compte, 60 % slideshows, 30 % démo d'écran du quiz/carte, 10 % build in public. Lien en bio = landing avec `?test=1` (ouvre le quiz direct).
+- J5 : campagne Whop Content Rewards 250 $ à 1,5 $/1 000 vues, brief = "l'écran de la date de liberté dans les 2 premières secondes".
+- J10 : premiers Spark Ads (10-15 €/jour) sur les 3 posts avec le meilleur ratio clics-bio/vues.
+- J14 : Apple Search Ads 5 €/jour sur les 5 mots-clés ci-dessus (même avant la sortie, pour mesurer le CPI et préchauffer la fiche en attente ? non : seulement une fois l'app en TestFlight/Store ; d'ici là, 100 % vers la landing).
+- J21 : bilan, on coupe tout ce qui a un coût par inscrit > 2 € et on remet le budget sur le top 2.
+- J30 : objectif réaliste 3 000-8 000 inscrits waitlist à 0,3-1 € l'inscrit, et 2-3 créateurs à relancer en rev-share.
+
+### Le PC (Ryzen 7 6000) change une chose : tu peux produire des vidéos "premium" localement
+- CapCut Desktop et DaVinci Resolve (gratuit) tournent sans problème : démos d'écran 1080p60, sous-titres animés, zooms.
+- Remotion (React) : un template vidéo paramétré par date/score qui génère automatiquement 100 variantes de la "carte de liberté" (prénoms, dates, hooks) pour les tests Spark Ads. C'est le levier "volume de créas" que QUITTR payait à des éditeurs.
+- Pas besoin de GPU pour ça. Évite seulement la génération vidéo IA locale (Wan, etc.) : passe par Creatify/Arcads si tu veux tester des avatars.
+
+### Métriques cibles pour que 50 €/jour soit rentable
+Coût par inscrit waitlist < 1 € ; taux quiz terminé > 85 % ; email -> installation au lancement > 35 % ; installation -> payant (hard paywall) > 8 % ; donc coût par payant ≈ 30-35 € contre un panier annuel 29 € + lifetime/renouvellements : payback < 12 mois en mois 1, < 3 mois dès que l'organique prend le relais. Si le coût par inscrit dépasse 2 € après 300 € dépensés sur un canal, coupe.
+
+## 8. Déploiement de la landing (index.html)
+1. Crée une Google Sheet, Extensions > Apps Script, colle le `doPost` du commentaire en haut de `index.html`, Déployer > Application web > accès "Tout le monde", copie l'URL dans `CONFIG.GAS_URL`.
+2. Remplace `CONFIG.BRAND` par ton nom, `FOUNDER_CAP`, l'email de contact, et ajoute une clé PostHog EU si tu veux l'entonnoir (événements : page_view, quiz_opened, quiz_answer, quiz_result, pledge, lead_submitted, lead_success, share_copied).
+3. Héberge en 1 clic : Vercel/Netlify (drag & drop du dossier) ou GitHub Pages sur ce dépôt. Domaine court.
+4. Lien en bio : `https://ton-domaine/?test=1` (ouvre le quiz immédiatement). Liens créateurs : `?ref=nomducreateur` (stocké dans la Sheet pour l'attribution).
